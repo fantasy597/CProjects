@@ -23,7 +23,6 @@ int bisearch(int ary[], int left, int right, int num)
         return bisearch(ary, left, right, num);
     }
 }
-
 int main()
 {
     int n, array[10000], i, num;

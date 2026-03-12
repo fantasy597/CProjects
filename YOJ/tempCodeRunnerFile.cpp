@@ -1,33 +1,42 @@
-   int zimu[26] = {0};
-    int i = 0;
-    while(*(s + i) != '\0')
+#include<iostream>
+#include<string>
+using namespace std;
+int priority(char x)
+{
+    if(x == '(')return 0;
+    if(x == '-')return 1;
+    if(x == '>')return 2;
+    if(x == '|')return 3;
+    if(x == '&')return 4;
+    if(x == '!')return 5;
+    return -1;
+}
+bool cal(bool a,bool b,char x)
+{
+    if(x == '!')return !a;
+    if(x == '&')return a && b;
+    if(x == '|')return a || b;
+    if(x == '>')return !a || b;
+    if(x == '-')return a && b || !a && !b;
+    return false;  //非法输入直接返回false 
+}
+int main()
+{
+    int abc[26] = {0};
+    string str;
+    getline(cin,str);
+    for(int i = 0;i < str.size();i++)
     {
-        zimu[*(s + i) - 'a' + 1]++;
-        i++;
-    }
-    int maxn = 1;
-    int minn = i;
-    for(int j = 1;j <= 26;j++)
-    {
-        if(zimu[j])
+        if(str[i] >= 'a' && str[i] <= 'z')
         {
-        maxn = maxn > zimu[j] ? maxn : zimu[j];
-        minn = minn < zimu[j] ? minn : zimu[j];
+            abc[str[i] - 'a']++;
         }
     }
-    int cha = maxn - minn;
-    if(cha == 0 || cha == 1)
+    for(int i = 0;i < 26;i++)
     {
-        printf("No Answer\n0");
-        return;
+        if(abc[i] != 0)cout<<char(i + 'a')<<' ';
     }
-    for(int m = 2;m * m < cha;m++)
-    {
-        if(cha % m == 0)
-        {
-            printf("No Answer\n0");
-            return;
-        }
-    }
-    printf("Lucky Word\n%d",cha);
-    return;
+    cout<<str;
+    cout<<endl;
+    return 0;
+}

@@ -35,7 +35,7 @@ void sort(int a[],int low,int high,int b[])
         sort(a,low,mid,b);
         sort(a,mid + 1,high,b);
         merge(a,low,mid,high,b);
-
+ 
     }
 }
 int main()
