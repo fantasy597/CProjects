@@ -1,6 +1,9 @@
 #include<iostream>
 using namespace std;
 int main(){
-    cout<<sizeof(123);
+    int *p;
+    char *i;
+    long long *f;
+    cout<<sizeof(p)<<" "<<sizeof(i)<<" "<<sizeof(f);
     return 0;
 }

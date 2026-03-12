@@ -1,4 +1,8 @@
-   int zimu[26] = {0};
+#include <stdio.h>
+
+void word(char *s)
+{
+    int zimu[26] = {0};
     int i = 0;
     while(*(s + i) != '\0')
     {
@@ -31,3 +35,11 @@
     }
     printf("Lucky Word\n%d",cha);
     return;
+}
+int main(void)
+{
+    char s[102];
+    scanf("%s", s);
+    word(s);
+    return 0;
+}

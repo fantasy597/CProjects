@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-
+#include<stdio.h>
+#include<string.h>
+#include<cstring>
 char parseCmd(char *s, char *str1, char *str2)
 {
     int i = 0;
@@ -37,12 +37,12 @@ int countStr(char *s, char *pStr1)
     }
     return counter;
 }
-void deleteStr(char *s, char *pStr1)
+void deleteStr(char *s,char *pStr1)
 {
     int i = 0;
-    char *p = strstr(s, pStr1);
-    int lenth1 = strlen(s), lenth2 = strlen(pStr1);
-    while (*(p + lenth2 + i) != '\0')
+    char *p = strstr(s,pStr1);
+    int lenth1 = strlen(s),lenth2 = strlen(pStr1);
+    while(*(p + lenth2 + i) != '\0')
     {
         *(p + i) = *(p + lenth2 + i);
         i++;
@@ -64,28 +64,57 @@ void insertStr(char *s,char *pstr1,char *pstr2)
     {
         *(p + j + lenth2) = *(p + j);
     }
-    *(p + restlenth + lenth2) = '\0';
     for(int i = 0;i < lenth2;i++)
     {
         *(p + i) = *(pstr2 + i);
     }
 }
+void change(char *p,char *pstr1,char *pstr2)
+{
+    int lenth1 = strlen(pstr1),lenth2 = strlen(pstr2);
+    char *rest = p + lenth1;
+    strcat(pstr2,rest);
+    int lenth = strlen(pstr2);
+    int q = 0;
+    for(int q = 0;q < lenth;q++)
+    {
+        *(p + q) = *(pstr2 + q);
+    }
+}
+
+char *replaceStr(char *s,char *pstr1,char *pstr2)
+{
+    char temp[500];
+    strcpy(temp,s);
+    int n = countStr(s,pstr1);
+    int lenth2 = strlen(pstr2);
+    char *p = strstr(s,pstr1);
+    //change(p,pstr1,pstr2);
+    strcpy(p,pstr2);
+    //strcat(p + lenth2,)
+    for(int i = 2;i <= n;i++)
+    {
+        p = strstr(p + lenth2,pstr1);
+    }
+    return s;
+}
 int main()
 {
-    char s[500], cmdStr[500], str1[500], str2[500], cmd;
-    char *pStr1, *pStr2;
+	char s[500], cmdStr[500], str1[500], str2[500], cmd;
+	char *pStr1, *pStr2;
 
     gets(s);
-    gets(cmdStr);
+	gets(cmdStr);
     pStr1 = str1;
     pStr2 = str2;
 
     cmd = parseCmd(cmdStr, pStr1, pStr2);
 
-    switch (cmd)
+    switch ( cmd )
     {
     case 'C':
         printf("%d\n", countStr(s, pStr1));
+        break;
     case 'D':
         deleteStr(s, pStr1);
         printf("%s\n", s);
@@ -93,6 +122,9 @@ int main()
     case 'I':
         insertStr(s, pStr1, pStr2);
         printf("%s\n", s);
+        break;
+    case 'R':
+        printf("%s\n", replaceStr(s, pStr1, pStr2));
         break;
     }
     return 0;

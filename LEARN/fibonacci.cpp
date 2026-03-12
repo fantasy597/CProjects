@@ -1,19 +1,28 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
+long long arr[100] = {0};           //记忆化搜索
+long long fibonacci(int x)
+{
+    if (x == 1 || x == 2)
+    {
+        arr[x] = 1;
+        return arr[x];
+    }
+    else
+    {
+    if(arr[x] != 0)
+    {
+        return arr[x];             
+    }else{
+        arr[x] = fibonacci(x - 1) + fibonacci(x - 2);
+        return arr[x];                 //将已经求出来的数据存在arr中
+    }
+    }
+}
 int main()
 {
-    int a,b,c,n;
-    a=1,b=1;
-    cin>>n;
-    if(n == 1||n == 2){
-        c = 1;
-    }else{
-        for(int i = 3;i <= n;i++){
-            c = a + b;
-            a = b, b = c;
-        }
-    
-    }
-    cout<<c<<endl;
+    int n;
+    cin >> n;
+    cout << fibonacci(n);
     return 0;
 }
